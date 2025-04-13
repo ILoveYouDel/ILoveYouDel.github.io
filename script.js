@@ -372,4 +372,10 @@ const diferencia = fecha - inicioAno;
 const unDia = 1000 * 60 * 60 * 24; // Milisegundos en un día
 const diaDelAno = Math.floor(diferencia / unDia); // 1 - 365 (o 366 en año bisiesto)
 
-document.getElementById('fraseDelDia').innerText = frases[(diaDelAno - 1) % frases.length];
+let frasesDelHistorial = '';
+for (let i = 0; i < 10; i++) {
+    const diaHistorial = (diaDelAno - 1 - i + frases.length) % frases.length;
+    frasesDelHistorial += frases[diaHistorial] + '\n'; // Agrega cada frase al historial
+}
+
+document.getElementById('fraseDelDia').innerText = frasesDelHistorial;
