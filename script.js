@@ -1,110 +1,59 @@
-// Corazones flotantes optimizados
-let heartInterval = setInterval(createHearts, 500);
-let activeHearts = new Set();
-
+// CORAZONES FLOTANTES
 function createHearts() {
-    const container = document.querySelector('.hearts-container');
-    const heart = document.createElement('div');
-    heart.className = 'heart floating';
-    heart.innerHTML = '❤️';
+    const heartsContainer = document.getElementById('hearts');
+    for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        heartsContainer.appendChild(heart);
+    }
+}
+
+// RAZONES DE AMOR
+function setupReasons() {
+    const messages = [
+        "Tu sonrisa ilumina mi día",
+        "Cómo me haces reír sin esfuerzo",
+        "Tu apoyo incondicional",
+        "La forma en que me miras",
+        "Tu honestidad y transparencia",
+        "Cómo entiendes mis silencios",
+        "Tu pasión por [algo que le guste]",
+        "Esa cosa única que haces con [detalle específico]",
+        "Cómo me haces sentir amado",
+        "Tu capacidad de escuchar",
+        "Lo increíble que eres con [situación]",
+        "Simplemente... eres tú"
+    ];
     
-    heart.style.left = `${Math.random() * 95 + 2.5}%`;
-    heart.style.animationDuration = `${Math.random() * 4 + 3}s`;
-    heart.style.fontSize = `${Math.random() * 25 + 15}px`;
-    heart.style.opacity = Math.random() * 0.5 + 0.5;
-    
-    container.appendChild(heart);
-    activeHearts.add(heart);
-    
-    heart.addEventListener('animationend', () => {
-        heart.remove();
-        activeHearts.delete(heart);
+    const balloons = document.querySelectorAll('.reason-balloon');
+    balloons.forEach(balloon => {
+        balloon.addEventListener('click', function() {
+            const reasonNumber = parseInt(this.getAttribute('data-reason'));
+            alert(`Razón #${reasonNumber}:\n\n"${messages[reasonNumber-1]}"`);
+        });
     });
 }
 
-// Sistema de mensajes con transiciones
-let currentMessageIndex = 0;
-const messages = [
-    "Ya dos meses, aún me parece que fue ayer cuando comenzamos a salir juntos. En estos últimos 61 días no me arrepiento ni de un segundo que he paso junto a ti.",
-    "Te amo más que a nada en este mundo. Eres la razón por la que mi corazón late con tanta fuerza cada día.",
-    "Eres mi sueño hecho realidad, la persona que siempre quise encontrar y ahora tengo la suerte de tener a mi lado.",
-    "Mi corazón es tuyo por completo, hoy, mañana y por toda la eternidad.",
-    "Juntos por siempre 💞, superando cada obstáculo y celebrando cada momento feliz.",
-    "Te amo muchisimo mi reina, muchas felicidades por hoy. Quiero seguir haciendote webs cada mes asi que sigamos juntos por siempre"
-];
-
-function showNextMessage() {
-    const messageElement = document.querySelector('.message-text');
-    const messageContainer = document.querySelector('.love-message');
-    
-    messageContainer.classList.remove('long-message');
-    messageElement.style.animation = 'none';
-    void messageElement.offsetWidth;
-    messageElement.style.animation = 'pulse 2s infinite alternate';
-    messageElement.style.opacity = '0';
-    
-    setTimeout(() => {
-        const nextMessage = messages[currentMessageIndex];
-        messageElement.textContent = nextMessage;
-        
-        if (nextMessage.length > 100) {
-            messageContainer.classList.add('long-message');
-        }
-        
-        messageElement.style.opacity = '1';
-        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-        createConfetti();
-    }, 500);
-}
-
-// Efecto confeti mejorado
-function createConfetti() {
-    const symbols = ['❤️', '💖', '💕', '✨', '🌟'];
-    const container = document.createElement('div');
-    container.className = 'confetti-container';
-    
-    for(let i = 0; i < 75; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'confetti-particle';
-        particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-        
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.animationDelay = `${Math.random() * 0.5}s`;
-        particle.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
-        particle.style.fontSize = `${Math.random() * 20 + 15}px`;
-        
-        container.appendChild(particle);
-    }
-    
-    document.body.appendChild(container);
-    
-    setTimeout(() => {
-        container.remove();
-    }, 3000);
-}
-
-// Evento principal del botón
-document.getElementById('surpriseBtn').addEventListener('click', showNextMessage);
-
-// Efectos de sonido (opcional)
-function playBellSound() {
-    try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(784, audioContext.currentTime);
-        
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.start();
-        oscillator.stop(audioContext.currentTime + 1);
-    } catch (e) {
-        console.log("Audio no soportado");
+// CARTA SECRETA
+function openLetter() {
+    const password = document.getElementById('letter-password').value;
+    // CONTRASEÑA: Reemplaza "0101" con tu fecha real (DDMM)
+    const correctPassword = "1703";
+    if(password === correctPassword) {
+        document.getElementById('letter-content').style.display = 'block';
+    } else {
+        alert("Contraseña incorrecta, amor. Intenta de nuevo ❤️");
     }
 }
+
+// INICIALIZAR
+window.onload = function() {
+    createHearts();
+    setupReasons();
+};
+
