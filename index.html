@@ -3,27 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Amor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <title>3 Meses Contigo | [Yordan] & [Delenis]</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos para el botón de música */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 126, 185, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            background: #ff5ca1;
+            transform: scale(1.1);
+        }
+        
+        .music-control.playing::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 10px;
+            height: 10px;
+            background: #7afcff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 1; }
+            70% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(0.8); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <div class="hearts-container"></div>
+    <!-- Botón de música flotante -->
+    <button id="musicBtn" class="music-control" title="Reproducir música">🎵</button>
     
-    <header>
-        <h1>Para Mi Amor 💖</h1>
-    </header>
-    
-    <main>
-        <div class="love-message">
-            <p class="message-text">Hola mi amor, felicidades</p>
-        </div>
+    <audio id="bg-music" loop>
+        <source src="yung kai - blue (official music video)(MP3_160K).mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <script>
+        // Control de música
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bg-music');
         
-        <button id="surpriseBtn">Tócame ❤️</button>
-    </main>
+        
+        // Control manual con el botón
+        musicBtn.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                this.classList.add('playing');
+                this.title = "Pausar música";
+            } else {
+                bgMusic.pause();
+                this.classList.remove('playing');
+                this.title = "Reproducir música";
+            }
+        });
+    </script>
+    <!-- PORTADA -->
+    <section id="portada">
+        <div class="hearts-container" id="hearts"></div>
+        <h1>[Yordan] & [Delenis]</h1>
+        <p>Celebrando 3 meses juntos</p>
+        <p class="subtitle">"Pequeño fragmento de nuestra historia"</p>
+    </section>
+
+    <!-- NUESTRA HISTORIA -->
+    <section id="historia">
+        <h2>Nuestra Historia</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Nuestro Primer Día</h3>
+                    <p>[17 de marzo de 2025]</p>
+                    <p>El día que todo comenzó... Tú tan hermosa y yo tan nervioso. En ese momento no sabía que se podía ser tan feliz con alguien.</p>
+                    <p>Cuando nos tomamos de las manos, sentía cómo todos mis miedos desaparecían poco a poco, cómo todos mis problemas pasaban a ser solo parte de mi historia.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Nuestra Primera Cita</h3>
+                    <p>[22 de marzo de 2025]</p>
+                    <p>Recuerdo cada detalle de ese día: yo con unas ganas enormes de verte y abrazarte frente al hotel, y tú tan perfecta como siempre.</p>
+                    <p>Caminamos sin rumbo fijo, simplemente disfrutando de nuestra compañía, de nuestro amor.</p>
+                </div>
+            </div>
     
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Salidas a los parques</h3>
+                    <p>[Varias fechas]</p>
+                    <p>Esos días en que refugiábamos nuestro amor en los parques porque aún no nos habíamos presentado oficialmente a nuestras familias.</p>
+                    <p>Esos días mantienen nuestra historia grabada en cada rincón de la ciudad.</p>
+                </div>
+            </div>
+    
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Nuestra primera vez</h3>
+                    <p>[18 de abril de 2025]</p>
+                    <p>¿Cómo olvidar ese Viernes Santo no tan santo, en el que me temblaba todo el cuerpo de los nervios?</p>
+                    <p>No tengo dudas de que fuiste la persona indicada para compartir ese momento tan íntimo.</p>
+                </div>
+            </div>
+    
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Viaje a Gibara</h3>
+                    <p>[28 de mayo de 2025]</p>
+                    <p>Sin duda, uno de mis mejores viajes a mi ciudad favorita, y unos de los cinco mejores días de mi vida.</p>
+                    <p>Despertarme y verte ahí a mi lado, salir a enseñarte la ciudad, las playas... Disfrutar contigo esos hermosos momentos no lo cambio por nada en este mundo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA DE FOTOS -->
+    <section id="galeria">
+        <h2>Nuestros Momentos</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="IMG/PrimeraCita.jpg" alt="Descripción">
+                <div class="caption">"Nuestra Primera Cita"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Parque.jpg" alt="Descripción">
+                <div class="caption">"Un dia random en el parque infantil"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara1.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara2.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara3.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara4.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara5.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara6.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara7.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara8.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara9.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/Gibara10.jpg" alt="Descripción">
+                <div class="caption">"Gibara"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/GraduacionMia.jpg" alt="Descripción">
+                <div class="caption">"Mi graduacion"</div>
+            </div>
+            <div class="gallery-item">
+                <img src="IMG/GraduacionDele.jpg" alt="Descripción">
+                <div class="caption">"Tu graduacion, no es buena la foto pero es la que me dio por poner"</div>
+            </div>
+            <!-- Añadir más fotos -->
+        </div>
+    </section>
+
+    <!-- NUESTRAS CANCIONES -->
+    <section id="canciones">
+        <h2>CANCIONES</h2>
+        <div class="songs-container">
+            <div class="song-card">
+                <h3>Blue - Yung Kai</h3>
+                <div class="video-container">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/watch?v=IpFX2vq8HKw" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p>"Explica por qué esta canción es especial..."</p>
+            </div>
+            
+            <div class="song-card">
+                <h3>Canción que Te Dedico Hoy</h3>
+                <div class="video-container">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p>"Mensaje personal sobre esta canción"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RAZONES -->
+    <section id="razones">
+        <h2>12 Razones por las que Te Amo</h2>
+        <div class="reasons-container">
+            <div class="reason-balloon" data-reason="1">
+                <p>Razón #1</p>
+            </div>
+            <div class="reason-balloon" data-reason="2">
+                <p>Razón #2</p>
+            </div>
+            <!-- Añadir hasta 12 razones -->
+        </div>
+    </section>
+
+    <!-- CARTA SECRETA -->
+    <section id="secret-letter">
+        <h2>Una Sorpresa Para Ti</h2>
+        <div class="envelope">
+            <p>Para leer mi carta secreta, ingresa la fecha de nuestro primer beso (DDMM):</p>
+            <div class="password-input">
+                <input type="password" id="letter-password" placeholder="Ej: 1505">
+                <button onclick="openLetter()">Abrir Carta</button>
+            </div>
+            <div id="letter-content">
+                <h3>Mi Amor,</h3>
+                <p>Escribe aquí todo lo que sientes...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO FINAL -->
+    <section id="video-final">
+        <h2>Un Mensaje del Corazón</h2>
+        <div class="video-wrapper">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p class="video-caption">"Pequeño mensaje debajo del video"</p>
+        </div>
+    </section>
+
     <footer>
-        <p>Hecho con amor eterno 💑</p>
+        <p>Hecho con ❤️ para [Su Nombre] - [Fecha Actual]</p>
+        <p class="footer-note">P.D: Sí, revisaste hasta el final... eso solo demuestra lo increíble que eres</p>
     </footer>
 
     <script src="script.js"></script>
