@@ -1,7 +1,7 @@
 // CORAZONES FLOTANTES
 function createHearts() {
     const heartsContainer = document.getElementById('hearts');
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 100; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.innerHTML = '❤';
@@ -20,13 +20,13 @@ function setupReasons() {
         "Cómo me haces reír sin esfuerzo",
         "Tu apoyo incondicional",
         "La forma en que me miras",
-        "Tu honestidad y transparencia",
+        "Que me haces sentir la persona mas feliz de este mundo",
         "Cómo entiendes mis silencios",
-        "Tu pasión por [algo que le guste]",
-        "Esa cosa única que haces con [detalle específico]",
+        "Tu pasión por la informatica",
+        "Esos ojos bellos",
         "Cómo me haces sentir amado",
         "Tu capacidad de escuchar",
-        "Lo increíble que eres con [situación]",
+        "Lo increíble que eres",
         "Simplemente... eres tú"
     ];
     
@@ -42,8 +42,7 @@ function setupReasons() {
 // CARTA SECRETA
 function openLetter() {
     const password = document.getElementById('letter-password').value;
-    // CONTRASEÑA: Reemplaza "0101" con tu fecha real (DDMM)
-    const correctPassword = "1703";
+    const correctPassword = "1403";
     if(password === correctPassword) {
         document.getElementById('letter-content').style.display = 'block';
     } else {
@@ -57,3 +56,23 @@ window.onload = function() {
     setupReasons();
 };
 
+// Efecto adicional para los botones de música
+document.querySelectorAll('.music-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const note = document.createElement('span');
+                note.innerHTML = '♪';
+                note.style.position = 'absolute';
+                note.style.left = Math.random() * 30 + 'px';
+                note.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                note.style.animation = `noteFloat ${Math.random() * 0.5 + 0.5}s ease-out forwards`;
+                this.appendChild(note);
+                
+                setTimeout(() => {
+                    note.remove();
+                }, 500);
+            }, i * 200);
+        }
+    });
+});
